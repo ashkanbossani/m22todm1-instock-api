@@ -3,11 +3,13 @@ const router = express.Router();
 const fs = require("fs");
 const { v4: uuidv4 } = require("uuid");
 
-router.use(express.json());
+const getWarehouses = () => {
+  const jsonData = fs.readFileSync("./data/warehouses.json", "utf8");
+  const jsonDataParsed = JSON.parse(jsonData);
+  return jsonDataParsed;
+};
 
-let warehouseList = [];
-
-fs.readFilee("./data/warehouses.json", "utf8", (err, data) => {
+fs.readFile("./data/warehouses.json", "utf8", (err, data) => {
   err ? console.log(err) : (warehouseList = JSON.parse(data));
 });
 

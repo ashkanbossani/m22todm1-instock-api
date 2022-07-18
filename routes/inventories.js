@@ -3,11 +3,11 @@ const router = express.Router();
 const fs = require("fs");
 const { v4: uuidv4 } = require("uuid");
 
-let inventoryList = [];
-
-fs.readFile("./data/inventories.json", "utf8", (err, data) => {
-  err ? console.log(err) : (inventoryList = JSON.parse(data));
-});
+const getInventories = () => {
+  const jsonData = fs.readFileSync("./data/inventories.json", "utf8");
+  const jsonDataParsed = JSON.parse(jsonData);
+  return jsonDataParsed;
+};
 
 router.get("/", (req, res) => {
   res.status(200).json(inventoryList);
