@@ -12,13 +12,13 @@ const writeInventory = (jsonDataParsed) => {
 };
 
 const getAll = () => {
-  return readInventories();
+  // return readInventories();
 };
 
 const getIndividual = (id) => {
-  const inventories = getAll();
-  const inventory = inventories.find((inventory) => inventory.id === id);
-  return inventory;
+  // const inventories = getAll();
+  // const inventory = inventories.find((inventory) => inventory.id === id);
+  // return inventory;
 };
 
 const updateOne = (id, body) => {};
