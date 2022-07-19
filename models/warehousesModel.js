@@ -42,15 +42,15 @@ const createOne2 = (warehouseDetails) => {
 
   const newWarehouse = {
     id: uuidv4(),
-    name: warehouseDetails.name,
+    name: warehouseDetails.warehouseName,
     address: warehouseDetails.address,
     city: warehouseDetails.city,
     country: warehouseDetails.country,
     contact: {
-      name: warehouseDetails.contactName,
-      position: warehouseDetails.contactPosition,
-      phone: warehouseDetails.contactPhone,
-      email: warehouseDetails.contactEmail,
+      name: warehouseDetails.name,
+      position: warehouseDetails.position,
+      phone: warehouseDetails.phone,
+      email: warehouseDetails.email,
     },
   };
 
