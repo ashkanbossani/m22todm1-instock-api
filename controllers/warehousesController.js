@@ -13,29 +13,29 @@ const writeWarehouses = (jsonDataParsed) => {
 };
 
 const getAll = (req, res) => {
-  const warehouses = warehousesModel.getAll2();
+  const warehouses = warehousesModel.getAll();
   res.status(200).json(warehouses);
 };
 
 const getAllFiltered = (req, res) => {};
 
 const getIndividual = (req, res) => {
-  const warehouses = warehousesModel.getIndividual2(req.params.id);
+  const warehouses = warehousesModel.getIndividual(req.params.id);
   res.status(200).json(warehouses);
 };
 
 const updateOne = (req, res) => {
-  const warehouses = warehousesModel.updateOne2(req.params.id, req.body);
+  const warehouses = warehousesModel.updateOne(req.params.id, req.body);
   res.status(200).json(warehouses);
 };
 
 const deleteOne = (req, res) => {
-  const warehouses = warehousesModel.deleteOne2(req.params.id);
+  const warehouses = warehousesModel.deleteOne(req.params.id);
   res.status(200).json(warehouses);
 };
 
 const createOne = (req, res) => {
-  const warehouses = warehousesModel.createOne2(req.body);
+  const warehouses = warehousesModel.createOne(req.body);
   res.status(200).json(warehouses);
 };
 
