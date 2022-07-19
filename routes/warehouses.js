@@ -1,32 +1,17 @@
 const express = require("express");
 const router = express.Router();
-const fs = require("fs");
-const { v4: uuidv4 } = require("uuid");
+const warehousesController = require("../controllers/warehousesController");
 
-const getWarehouses = () => {
-  const jsonData = fs.readFileSync("./data/warehouses.json", "utf8");
-  const jsonDataParsed = JSON.parse(jsonData);
-  return jsonDataParsed;
-};
+router.get("/", warehousesController.getAll2);
 
-fs.readFile("./data/warehouses.json", "utf8", (err, data) => {
-  err ? console.log(err) : (warehouseList = JSON.parse(data));
-});
+router.get("/", warehousesController.getAllFiltered2);
 
-router.get("/", (req, res) => {
-  res.status(200).json(warehouseList);
-});
+router.get("/:id", warehousesController.getIndividual2);
 
-router.get("/", (req, res) => {
-  //get request for mapped warehouselist for certain info in warehouse data
-});
+router.put("/:id", warehousesController.updateOne2);
 
-router.get("/:id", (req, res) => {});
+router.delete("/:id", warehousesController.deleteOne2);
 
-router.put("/:id", (req, res) => {});
-
-router.delete("/:id", (req, res) => {});
-
-router.post("/add", (req, res) => {});
+router.post("/add", warehousesController.createOne2);
 
 module.exports = router;
