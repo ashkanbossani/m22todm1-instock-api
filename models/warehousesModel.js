@@ -22,7 +22,7 @@ const getAllFiltered2 = (req, res) => {
 const getIndividual2 = (id) => {
   const warehouses = getAll2();
   const warehouse = warehouses.find((warehouses) => warehouses.id === id);
-  return warehouses;
+  return warehouse;
 };
 
 const updateOne2 = (id, body) => {};
