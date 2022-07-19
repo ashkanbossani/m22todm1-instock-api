@@ -1,14 +1,14 @@
-const fs = require("fs");
-const { v4: uuidv4 } = require("uuid");
+const fs = require('fs');
+const { v4: uuidv4 } = require('uuid');
 
 const readWarehouses2 = () => {
-  const jsonData = fs.readFileSync("./data/warehouses.json", "utf8");
+  const jsonData = fs.readFileSync('./data/warehouses.json', 'utf8');
   const jsonDataParsed = JSON.parse(jsonData);
   return jsonDataParsed;
 };
 
 const writeWarehouses2 = (jsonDataParsed) => {
-  fs.writeFileSync("./data/warehouses.json", JSON.stringify(jsonDataParsed));
+  fs.writeFileSync('./data/warehouses.json', JSON.stringify(jsonDataParsed));
 };
 
 const getAll2 = () => {
@@ -29,7 +29,28 @@ const updateOne2 = (id, body) => {};
 
 const deleteOne2 = (id) => {};
 
-const createOne2 = (body) => {};
+const createOne2 = (warehouseDetails) => {
+  const warehousesData = readWarehouses2();
+
+  const newWarehouse = {
+    id: uuidv4(),
+    name: warehouseDetails.name,
+    address: warehouseDetails.address,
+    city: warehouseDetails.city,
+    country: warehouseDetails.country,
+    contact: {
+      name: warehouseDetails.contactName,
+      position: warehouseDetails.contactPosition,
+      phone: warehouseDetails.contactPhone,
+      email: warehouseDetails.contactEmail,
+    },
+  };
+
+  warehousesData.push(newWarehouse);
+  writeWarehouses2(warehousesData);
+
+  return newWarehouse;
+};
 
 module.exports = {
   getAll2,

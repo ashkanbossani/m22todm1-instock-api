@@ -35,7 +35,8 @@ const deleteOne2 = (req, res) => {
 };
 
 const createOne2 = (req, res) => {
-  const warehouses = warehousesModel.createOne2(req.body);
+  const warehouseDetails = req.body;
+  const warehouses = warehousesModel.createOne2(warehouseDetails);
   res.status(200).json(warehouses);
 };
 
