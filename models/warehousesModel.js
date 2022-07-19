@@ -1,47 +1,47 @@
 const fs = require("fs");
 const { v4: uuidv4 } = require("uuid");
 
-const readWarehouses2 = () => {
+const readWarehouses = () => {
   const jsonData = fs.readFileSync("./data/warehouses.json", "utf8");
   const jsonDataParsed = JSON.parse(jsonData);
   return jsonDataParsed;
 };
 
-const writeWarehouses2 = (jsonDataParsed) => {
+const writeWarehouses = (jsonDataParsed) => {
   fs.writeFileSync("./data/warehouses.json", JSON.stringify(jsonDataParsed));
 };
 
-const getAll2 = () => {
-  return readWarehouses2();
+const getAll = () => {
+  return readWarehouses();
 };
 
-const getAllFiltered2 = (req, res) => {
+const getAllFiltered = (req, res) => {
   //use map here to filter specific items of warehouse list
 };
 
-const getIndividual2 = (id) => {
-  const warehouses = getAll2();
+const getIndividual = (id) => {
+  const warehouses = getAll();
   const warehouse = warehouses.find((warehouses) => warehouses.id === id);
   return warehouse;
 };
 
-const updateOne2 = (id, body) => {};
+const updateOne = (id, body) => {};
 
-const deleteOne2 = (id) => {
-  const warehouses = getAll2();
+const deleteOne = (id) => {
+  const warehouses = getAll();
   const warehouse = warehouses.find((warehouses) => warehouses.id === id);
   const warehouseIndex = warehouses.indexOf(warehouse);
   warehouses.splice(warehouseIndex, 1);
-  writeWarehouses2(warehouses);
+  writeWarehouses(warehouses);
 };
 
-const createOne2 = (body) => {};
+const createOne = (body) => {};
 
 module.exports = {
-  getAll2,
-  getIndividual2,
-  getAllFiltered2,
-  updateOne2,
-  deleteOne2,
-  createOne2,
+  getAll,
+  getIndividual,
+  getAllFiltered,
+  updateOne,
+  deleteOne,
+  createOne,
 };
