@@ -27,7 +27,13 @@ const getIndividual2 = (id) => {
 
 const updateOne2 = (id, body) => {};
 
-const deleteOne2 = (id) => {};
+const deleteOne2 = (id) => {
+  const warehouses = getAll2();
+  const warehouse = warehouses.find((warehouses) => warehouses.id === id);
+  const warehouseIndex = warehouses.indexOf(warehouse);
+  warehouses.splice(warehouseIndex, 1);
+  writeWarehouses2(warehouses);
+};
 
 const createOne2 = (body) => {};
 
