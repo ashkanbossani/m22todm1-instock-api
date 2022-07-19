@@ -28,11 +28,13 @@ const getIndividual = (id) => {
 const updateOne = (id, body) => {};
 
 const deleteOne = (id) => {
+  //delete single warehouse and associated inventories
   const warehouses = getAll();
   const warehouse = warehouses.find((warehouses) => warehouses.id === id);
   const warehouseIndex = warehouses.indexOf(warehouse);
   warehouses.splice(warehouseIndex, 1);
   writeWarehouses(warehouses);
+  return warehouses;
 };
 
 const createOne = (body) => {};
