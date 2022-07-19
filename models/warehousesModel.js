@@ -12,7 +12,7 @@ const writeWarehouses2 = (jsonDataParsed) => {
 };
 
 const getAll2 = () => {
-  return readWarehouses();
+  return readWarehouses2();
 };
 
 const getAllFiltered2 = (req, res) => {
@@ -20,7 +20,7 @@ const getAllFiltered2 = (req, res) => {
 };
 
 const getIndividual2 = (id) => {
-  const warehouses = getAll();
+  const warehouses = getAll2();
   const warehouse = warehouses.find((warehouses) => warehouses.id === id);
   return warehouses;
 };
