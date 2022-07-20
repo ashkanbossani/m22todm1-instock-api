@@ -12,7 +12,7 @@ const writeWarehouses = (jsonDataParsed) => {
 };
 
 const getAll = () => {
-  // return readWarehouses();
+  return readWarehouses();
 };
 
 const getAllFiltered = (req, res) => {
