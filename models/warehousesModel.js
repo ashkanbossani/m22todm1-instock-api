@@ -37,7 +37,7 @@ const deleteOne = (id) => {
   return warehouses;
 };
 
-const createOne2 = (warehouseDetails) => {
+const createOne = (warehouseDetails) => {
   const warehousesData = readWarehouses();
 
   const newWarehouse = {
