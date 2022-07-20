@@ -21,7 +21,13 @@ const phoneIsValid = (phoneInput) => {
 };
 
 const emailIsValid = (emailInput) => {
-  const regex = new RegExp(/[\w]{1,}[\.]?[\w]{1,}@[\w]{1,}[\.]?[\w]{2,6}/i);
+  // test whether the emailInput respects a regex expression
+  // where the string:
+  // contains a username (alphanumeric characters optionally divided by a period or _)
+  // followed by an @ character
+  // and the domain (alphanumeric characters, a period and a short alphanumeric sequence for the extension)
+  // e.g., hello@hello.com , hello.you@hello.movie, hello_hello@hello.com are all valid
+  const regex = new RegExp(/[\w]{1,}[\.]?[\w]{1,}@[\w]{1,}[\.][\w]{2,6}/i);
   return regex.test(emailInput);
 };
 

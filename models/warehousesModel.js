@@ -13,8 +13,10 @@ const writeWarehouses = (jsonDataParsed) => {
 
 // format phone number to +1 (234) 234-2345 format
 const formatPhoneNum = (phoneNum) => {
+  // Keep only numbers in phoneNum (remove all other characters)
   const numbers = phoneNum.match(/[\d]/g);
   console.log('array of numbers',numbers);
+  // Format number to +1 (234) 345-4325 format
   const cleanedNumber = `+1 (${numbers.slice(0,3).join('')}) ${numbers.slice(3,6).join('')}-${numbers.slice(6).join('')}`;
   return cleanedNumber;
 }
