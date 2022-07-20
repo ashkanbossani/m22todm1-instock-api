@@ -4,6 +4,9 @@ const cors = require("cors");
 const inventoryRoutes = require("./routes/inventories");
 const warehouseRoutes = require("./routes/warehouses");
 
+require('dotenv').config();
+const PORT = process.env.PORT || 5050;
+
 app.use(express.json());
 app.use(cors());
 
@@ -16,6 +19,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.listen(8080, () => {
-  console.log("Server is running on port 8080");
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
