@@ -20,9 +20,9 @@ const getAllFiltered = (req, res) => {
 };
 
 const getIndividual = (id) => {
-  // const warehouses = getAll();
-  // const warehouse = warehouses.find((warehouses) => warehouses.id === id);
-  // return warehouse;
+   const warehouses = getAll();
+   const warehouse = warehouses.find((warehouses) => warehouses.id === id);
+   return warehouse;
 };
 
 const updateOne = (id, body) => {};
