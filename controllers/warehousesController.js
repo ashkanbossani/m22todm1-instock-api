@@ -1,15 +1,28 @@
-const fs = require("fs");
-const { v4: uuidv4 } = require("uuid");
-const warehousesModel = require("../models/warehousesModel");
+const fs = require('fs');
+const { v4: uuidv4 } = require('uuid');
+const warehousesModel = require('../models/warehousesModel');
 
 const readWarehouses = () => {
-  const jsonData = fs.readFileSync("./data/warehouses.json", "utf8");
+  const jsonData = fs.readFileSync('./data/warehouses.json', 'utf8');
   const jsonDataParsed = JSON.parse(jsonData);
   return jsonDataParsed;
 };
 
 const writeWarehouses = (jsonDataParsed) => {
-  fs.writeFileSync("./data/warehouses.json", JSON.stringify(jsonDataParsed));
+  fs.writeFileSync('./data/warehouses.json', JSON.stringify(jsonDataParsed));
+};
+
+const phoneIsValid = (phoneInput) => {
+  if ((phoneInput.length = 10)) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+const emailIsValid = (emailInput) => {
+  const regex = new RegExp(/[\w]{1,}[\.]?[\w]{1,}@[\w]{1,}[\.]?[\w]{2,6}/i);
+  return regex.test(emailInput);
 };
 
 const getAll = (req, res) => {
@@ -36,6 +49,39 @@ const deleteOne = (req, res) => {
 
 const createOne = (req, res) => {
   const warehouseDetails = req.body;
+  // clean phone number to only keep numbers
+  const phoneNumber = warehouseDetails.phone.match(/[\d]/g).join('');
+  const email = warehouseDetails.email;
+
+  if (
+    !warehouseDetails.warehouseName ||
+    !warehouseDetails.address ||
+    !warehouseDetails.city ||
+    !warehouseDetails.country ||
+    !warehouseDetails.name ||
+    !warehouseDetails.position ||
+    !warehouseDetails.phone ||
+    !warehouseDetails.email
+  ) {
+    return res
+      .status(400)
+      .send(
+        'All fields (warehouse name, address, city, country, name, position, phone and email) are required.'
+      );
+  }
+
+  if (!phoneIsValid(phoneNumber)) {
+    return res
+      .status(400)
+      .send('Phone number must contain 10 digits. For example, 234-324-4534.');
+  }
+
+  if (!emailIsValid(email)) {
+    return res
+      .status(400)
+      .send('Email may only contain letters, digits, @ symbol or period. For example hello.you@great.stock');
+  }
+
   const warehouses = warehousesModel.createOne(warehouseDetails);
   res.status(200).json(warehouses);
 };

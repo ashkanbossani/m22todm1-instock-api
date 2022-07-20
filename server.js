@@ -10,6 +10,15 @@ const PORT = process.env.PORT || 5050;
 app.use(express.json());
 app.use(cors());
 
+app.use((req, res, next) => {
+  // Checking a content-type header in the request so we can handle JSON without errors from request.body
+  if (req.method === 'POST' && req.headers['content-type'] !== 'application/json') {
+    res.status(400).send('Server requires application/json');
+  } else {
+    next();
+  }
+});
+
 app.use("/inventories", inventoryRoutes);
 app.use("/warehouses", warehouseRoutes);
 

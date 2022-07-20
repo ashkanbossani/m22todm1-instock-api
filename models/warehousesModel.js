@@ -11,6 +11,14 @@ const writeWarehouses = (jsonDataParsed) => {
   fs.writeFileSync("./data/warehouses.json", JSON.stringify(jsonDataParsed));
 };
 
+// format phone number to +1 (234) 234-2345 format
+const formatPhoneNum = (phoneNum) => {
+  const numbers = phoneNum.match(/[\d]/g);
+  console.log('array of numbers',numbers);
+  const cleanedNumber = `+1 (${numbers.slice(0,3).join('')}) ${numbers.slice(3,6).join('')}-${numbers.slice(6).join('')}`;
+  return cleanedNumber;
+}
+
 const getAll = () => {
   return readWarehouses();
 };
@@ -39,6 +47,7 @@ const deleteOne = (id) => {
 
 const createOne = (warehouseDetails) => {
   const warehousesData = readWarehouses();
+  const cleanedNumber = formatPhoneNum(warehouseDetails.phone);
 
   const newWarehouse = {
     id: uuidv4(),
@@ -49,7 +58,7 @@ const createOne = (warehouseDetails) => {
     contact: {
       name: warehouseDetails.name,
       position: warehouseDetails.position,
-      phone: warehouseDetails.phone,
+      phone: cleanedNumber,
       email: warehouseDetails.email,
     },
   };
