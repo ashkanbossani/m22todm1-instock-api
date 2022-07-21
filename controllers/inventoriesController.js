@@ -33,7 +33,24 @@ const deleteOne = (req, res) => {
 };
 
 const createOne = (req, res) => {
-  const inventory = inventoryModel.createOne(req.body);
+  const itemDetails = req.body;
+
+  if (
+    !itemDetails.itemName ||
+    !itemDetails.description ||
+    !itemDetails.category ||
+    !itemDetails.status ||
+    !itemDetails.quantity ||
+    !itemDetails.warehouseName
+  ) {
+    return res
+      .status(400)
+      .send(
+        'All fields (item name, description, category, status, quantity and warehouse) are required.'
+      );
+  }
+
+  const inventory = inventoryModel.createOne(itemDetails);
   res.status(200).json(inventory);
 };
 
