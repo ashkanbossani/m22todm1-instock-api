@@ -1,6 +1,5 @@
 const fs = require('fs');
 const { v4: uuidv4 } = require('uuid');
-const warehousesModel = require('./warehousesModel');
 
 const readInventories = () => {
   const jsonData = fs.readFileSync('./data/inventories.json', 'utf8');
@@ -22,28 +21,18 @@ const getIndividual = (id) => {
   // return inventory;
 };
 
-const updateOne = (id, body) => {};
+// const updateOne = (id, body) => {};
 
-const deleteOne = (id) => {};
+// const deleteOne = (id) => {};
 
 const createOne = (itemDetails) => {
-  console.log(itemDetails);
   const inventoryData = readInventories();
-  const warehouseData = warehousesModel.getAll();
-  // TO FIX getting warehouse details doesn't work
-  // returns undefined, so POST request fails 
-  const newItemWarehouseDetails = warehouseData.find((warehouse) => {
-    console.log(warehouse.name, itemDetails.warehouseName);
-    warehouse.name === itemDetails.warehouseName;
-  });
-
-  const newItemWarehouseId = newItemWarehouseDetails.warehouseID;
 
   const newItem = {
     id: uuidv4(),
-    warehouseID: newItemWarehouseId,
+    warehouseID: itemDetails.warehouseId,
     warehouseName: itemDetails.warehouseName,
-    itemName: itemDetails.name,
+    itemName: itemDetails.itemName,
     description: itemDetails.description,
     category: itemDetails.category,
     status: itemDetails.status,
@@ -59,7 +48,7 @@ const createOne = (itemDetails) => {
 module.exports = {
   getAll,
   getIndividual,
-  updateOne,
-  deleteOne,
+  // updateOne,
+  // deleteOne,
   createOne,
 };

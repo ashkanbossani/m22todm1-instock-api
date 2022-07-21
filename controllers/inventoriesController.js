@@ -1,16 +1,7 @@
-const fs = require("fs");
-const { v4: uuidv4 } = require("uuid");
-const inventoryModel = require("../models/inventoriesModel");
-
-const readInventories = () => {
-  const jsonData = fs.readFileSync("./data/inventories.json", "utf8");
-  const jsonDataParsed = JSON.parse(jsonData);
-  return jsonDataParsed;
-};
-
-const writeInventory = (jsonDataParsed) => {
-  fs.writeFileSync("./data/inventories.json", JSON.stringify(jsonDataParsed));
-};
+const fs = require('fs');
+const { v4: uuidv4 } = require('uuid');
+const inventoryModel = require('../models/inventoriesModel');
+// const warehouseController = require('../controllers/warehousesController');
 
 const getAll = (req, res) => {
   const inventories = inventoryModel.getAll();
@@ -41,7 +32,9 @@ const createOne = (req, res) => {
     !itemDetails.category ||
     !itemDetails.status ||
     !itemDetails.quantity ||
-    !itemDetails.warehouseName
+    !itemDetails.warehouseName ||
+    // TODO retrive warehouseId, either from data or passed in from POST request
+    !itemDetails.warehouseId
   ) {
     return res
       .status(400)
