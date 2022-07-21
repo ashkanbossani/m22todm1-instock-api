@@ -27,12 +27,17 @@ const updateOne = (id, body) => {};
 const deleteOne = (id) => {};
 
 const createOne = (itemDetails) => {
+  console.log(itemDetails);
   const inventoryData = readInventories();
   const warehouseData = warehousesModel.getAll();
-  const newItemWarehouseDetails = warehouseData.find((item) => {
-    item.warehouseName === itemDetails.warehouseName;
+  // TO FIX getting warehouse details doesn't work
+  // returns undefined, so POST request fails 
+  const newItemWarehouseDetails = warehouseData.find((warehouse) => {
+    console.log(warehouse.name, itemDetails.warehouseName);
+    warehouse.name === itemDetails.warehouseName;
   });
-  const newItemWarehouseId = newItemWarehouseDetails.id;
+
+  const newItemWarehouseId = newItemWarehouseDetails.warehouseID;
 
   const newItem = {
     id: uuidv4(),
