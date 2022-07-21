@@ -1,5 +1,5 @@
-const fs = require('fs');
-const { v4: uuidv4 } = require('uuid');
+const fs = require("fs");
+const { v4: uuidv4 } = require("uuid");
 
 const readWarehouses = () => {
   const jsonData = fs.readFileSync("./data/warehouses.json", "utf8");
@@ -15,11 +15,13 @@ const writeWarehouses = (jsonDataParsed) => {
 const formatPhoneNum = (phoneNum) => {
   // Keep only numbers in phoneNum (remove all other characters)
   const numbers = phoneNum.match(/[\d]/g);
-  console.log('array of numbers',numbers);
+  console.log("array of numbers", numbers);
   // Format number to +1 (234) 345-4325 format
-  const cleanedNumber = `+1 (${numbers.slice(0,3).join('')}) ${numbers.slice(3,6).join('')}-${numbers.slice(6).join('')}`;
+  const cleanedNumber = `+1 (${numbers.slice(0, 3).join("")}) ${numbers
+    .slice(3, 6)
+    .join("")}-${numbers.slice(6).join("")}`;
   return cleanedNumber;
-}
+};
 
 const getAll = () => {
   return readWarehouses();
@@ -30,12 +32,29 @@ const getAllFiltered = (req, res) => {
 };
 
 const getIndividual = (id) => {
-   const warehouses = getAll();
-   const warehouse = warehouses.find((warehouses) => warehouses.id === id);
-   return warehouse;
+  const warehouses = getAll();
+  const warehouse = warehouses.find((warehouses) => warehouses.id === id);
+  return warehouse;
 };
 
-const updateOne = (id, body) => {};
+const updateOne = (id, body) => {
+  console.log("body", body);
+  const warehouses = getAll();
+  const warehouseId = id;
+  let i = warehouses.findIndex((warehouse) => warehouse.id === warehouseId);
+
+  warehouses[i].name = body.name;
+  warehouses[i].address = body.addres;
+  warehouses[i].city = body.city;
+  warehouses[i].country = body.country;
+  warehouses[i].contact.name = body.name;
+  warehouses[i].contact.position = body.postition;
+  warehouses[i].contact.phone = body.phone;
+  warehouses[i].contact.email = body.email;
+
+  writeWarehouses(warehouses);
+  return warehouses[i];
+};
 
 const deleteOne = (id) => {
   //delete single warehouse and associated inventories
