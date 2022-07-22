@@ -1,15 +1,15 @@
-const fs = require('fs');
-const { v4: uuidv4 } = require('uuid');
-const warehousesModel = require('../models/warehousesModel');
+const fs = require("fs");
+const { v4: uuidv4 } = require("uuid");
+const warehousesModel = require("../models/warehousesModel");
 
 const readWarehouses = () => {
-  const jsonData = fs.readFileSync('./data/warehouses.json', 'utf8');
+  const jsonData = fs.readFileSync("./data/warehouses.json", "utf8");
   const jsonDataParsed = JSON.parse(jsonData);
   return jsonDataParsed;
 };
 
 const writeWarehouses = (jsonDataParsed) => {
-  fs.writeFileSync('./data/warehouses.json', JSON.stringify(jsonDataParsed));
+  fs.writeFileSync("./data/warehouses.json", JSON.stringify(jsonDataParsed));
 };
 
 const phoneIsValid = (phoneInput) => {
@@ -45,6 +45,36 @@ const getIndividual = (req, res) => {
 
 const updateOne = (req, res) => {
   const warehouses = warehousesModel.updateOne(req.params.id, req.body);
+  if (
+    !warehouseDetails.warehouseName ||
+    !warehouseDetails.address ||
+    !warehouseDetails.city ||
+    !warehouseDetails.country ||
+    !warehouseDetails.name ||
+    !warehouseDetails.position ||
+    !warehouseDetails.phone ||
+    !warehouseDetails.email
+  ) {
+    return res
+      .status(400)
+      .send(
+        "All fields (warehouse name, address, city, country, name, position, phone and email) are required."
+      );
+  }
+
+  if (!phoneIsValid(phoneNumber)) {
+    return res
+      .status(400)
+      .send("Phone number must contain 10 digits. For example, 234-324-4534.");
+  }
+
+  if (!emailIsValid(email)) {
+    return res
+      .status(400)
+      .send(
+        "Email may only contain letters, digits, @ symbol or period. For example hello.you@great.stock"
+      );
+  }
   res.status(200).json(warehouses);
 };
 
@@ -56,7 +86,7 @@ const deleteOne = (req, res) => {
 const createOne = (req, res) => {
   const warehouseDetails = req.body;
   // clean phone number to only keep numbers
-  const phoneNumber = warehouseDetails.phone.match(/[\d]/g).join('');
+  const phoneNumber = warehouseDetails.phone.match(/[\d]/g).join("");
   const email = warehouseDetails.email;
 
   if (
@@ -72,20 +102,22 @@ const createOne = (req, res) => {
     return res
       .status(400)
       .send(
-        'All fields (warehouse name, address, city, country, name, position, phone and email) are required.'
+        "All fields (warehouse name, address, city, country, name, position, phone and email) are required."
       );
   }
 
   if (!phoneIsValid(phoneNumber)) {
     return res
       .status(400)
-      .send('Phone number must contain 10 digits. For example, 234-324-4534.');
+      .send("Phone number must contain 10 digits. For example, 234-324-4534.");
   }
 
   if (!emailIsValid(email)) {
     return res
       .status(400)
-      .send('Email may only contain letters, digits, @ symbol or period. For example hello.you@great.stock');
+      .send(
+        "Email may only contain letters, digits, @ symbol or period. For example hello.you@great.stock"
+      );
   }
 
   const warehouses = warehousesModel.createOne(warehouseDetails);
