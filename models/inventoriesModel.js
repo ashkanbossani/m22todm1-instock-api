@@ -17,15 +17,15 @@ const getAll = () => {
 
 const getIndividual = (id) => {
   const inventories = getAll();
-  const inventory = inventories.find((inventory) => inventory.id === id);
-  return inventory;
+  const item = inventories.filter((item) => item.id === id);
+  return item;
 };
 
 // const updateOne = (id, body) => {};
 
 const deleteOne = (id) => {
   const inventory = getAll();
-  const item = inventory.find((item) => item.id === id);
+  const item = inventory.find((item) => item.id == id);
   const itemIndex = inventory.indexOf(item);
   inventory.splice(itemIndex, 1);
   writeInventory(inventory);

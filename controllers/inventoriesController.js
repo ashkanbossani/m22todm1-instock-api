@@ -1,25 +1,24 @@
 const fs = require('fs');
-const { v4: uuidv4 } = require('uuid');
-const inventoryModel = require('../models/inventoriesModel');
-// const warehouseController = require('../controllers/warehousesController');
+const inventoriesModel = require('../models/inventoriesModel');
 
 const getAll = (req, res) => {
-  const inventories = inventoryModel.getAll();
+  const inventories = inventoriesModel.getAll();
   res.status(200).json(inventories);
 };
 
 const getIndividual = (req, res) => {
-  const inventory = inventoryModel.getIndividual(req.params.id);
-  res.status(200).json(inventory);
+  const id = req.params.id;
+  const item = inventoriesModel.getIndividual(id);
+  res.status(200).json(item);
 };
 
 const updateOne = (req, res) => {
-  const inventory = inventoryModel.updateOne(req.params.id, req.body);
+  const inventory = inventoriesModel.updateOne(req.params.id, req.body);
   res.status(200).json(inventory);
 };
 
 const deleteOne = (req, res) => {
-  const inventory = inventoryModel.deleteOne(req.params.id);
+  const inventory = inventoriesModel.deleteOne(req.params.id);
   if (!inventory){
     return res.status(404).send('No item was found for the provided id.')
   }
@@ -45,7 +44,7 @@ const createOne = (req, res) => {
       );
   }
 
-  const inventory = inventoryModel.createOne(itemDetails);
+  const inventory = inventoriesModel.createOne(itemDetails);
   res.status(200).json(inventory);
 };
 
