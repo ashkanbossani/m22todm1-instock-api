@@ -23,7 +23,14 @@ const getIndividual = (id) => {
 
 // const updateOne = (id, body) => {};
 
-// const deleteOne = (id) => {};
+const deleteOne = (id) => {
+  const inventory = getAll();
+  const item = inventory.find((item) => item.id === id);
+  const itemIndex = inventory.indexOf(item);
+  inventory.splice(itemIndex, 1);
+  writeInventory(inventory);
+  return inventory;
+};
 
 const createOne = (itemDetails) => {
   const inventoryData = readInventories();
@@ -49,6 +56,6 @@ module.exports = {
   getAll,
   getIndividual,
   // updateOne,
-  // deleteOne,
+  deleteOne,
   createOne,
 };
