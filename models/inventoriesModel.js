@@ -12,7 +12,7 @@ const writeInventory = (jsonDataParsed) => {
 };
 
 const getAll = () => {
-  // return readInventories();
+  return readInventories();
 };
 
 const getIndividual = (id) => {
