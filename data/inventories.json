@@ -698,13 +698,5 @@
     "category": "Health",
     "status": "Out of Stock",
     "quantity": 0
-  },
-  {
-    "id": "288382ed-43a3-4b4f-bbe7-7ba7c9cb8464",
-    "warehouseName": "Manhattan",
-    "description": "Useful tool to keep teeth clean",
-    "category": "pharmacy",
-    "status": "In Stock",
-    "quantity": "10"
   }
 ]
