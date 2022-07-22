@@ -1,14 +1,14 @@
-const fs = require("fs");
-const { v4: uuidv4 } = require("uuid");
+const fs = require('fs');
+const { v4: uuidv4 } = require('uuid');
 
 const readInventories = () => {
-  const jsonData = fs.readFileSync("./data/inventories.json", "utf8");
+  const jsonData = fs.readFileSync('./data/inventories.json', 'utf8');
   const jsonDataParsed = JSON.parse(jsonData);
   return jsonDataParsed;
 };
 
 const writeInventory = (jsonDataParsed) => {
-  fs.writeFileSync("./data/inventories.json", JSON.stringify(jsonDataParsed));
+  fs.writeFileSync('./data/inventories.json', JSON.stringify(jsonDataParsed));
 };
 
 const getAll = () => {
@@ -21,16 +21,34 @@ const getIndividual = (id) => {
   return inventory;
 };
 
-const updateOne = (id, body) => {};
+// const updateOne = (id, body) => {};
 
-const deleteOne = (id) => {};
+// const deleteOne = (id) => {};
 
-const createOne = (body) => {};
+const createOne = (itemDetails) => {
+  const inventoryData = readInventories();
+
+  const newItem = {
+    id: uuidv4(),
+    warehouseID: itemDetails.warehouseId,
+    warehouseName: itemDetails.warehouseName,
+    itemName: itemDetails.itemName,
+    description: itemDetails.description,
+    category: itemDetails.category,
+    status: itemDetails.status,
+    quantity: itemDetails.quantity,
+  };
+
+  inventoryData.push(newItem);
+  writeInventory(inventoryData);
+
+  return newItem;
+};
 
 module.exports = {
   getAll,
   getIndividual,
-  updateOne,
-  deleteOne,
+  // updateOne,
+  // deleteOne,
   createOne,
 };

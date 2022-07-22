@@ -698,5 +698,15 @@
     "category": "Health",
     "status": "Out of Stock",
     "quantity": 0
+  },
+  {
+    "id": "035d06ec-5efc-4b9d-82d5-f056e2dbcb0f",
+    "warehouseID": "ade0a47b-cee6-4693-b4cd-a7e6cb25f4b7",
+    "warehouseName": "Seattle",
+    "itemName": "Phone",
+    "description": "Gadget",
+    "category": "Electronics",
+    "status": "In Stock",
+    "quantity": "2"
   }
 ]
