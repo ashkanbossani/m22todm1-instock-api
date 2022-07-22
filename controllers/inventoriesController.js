@@ -20,6 +20,9 @@ const updateOne = (req, res) => {
 
 const deleteOne = (req, res) => {
   const inventory = inventoryModel.deleteOne(req.params.id);
+  if (!inventory){
+    return res.status(404).send('No item was found for the provided id.')
+  }
   res.status(200).json(inventory);
 };
 
@@ -33,7 +36,6 @@ const createOne = (req, res) => {
     !itemDetails.status ||
     !itemDetails.quantity ||
     !itemDetails.warehouseName ||
-    // TODO retrive warehouseId, either from data or passed in from POST request
     !itemDetails.warehouseId
   ) {
     return res
