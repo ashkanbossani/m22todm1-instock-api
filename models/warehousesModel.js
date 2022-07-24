@@ -11,6 +11,17 @@ const writeWarehouses = (jsonDataParsed) => {
   fs.writeFileSync("./data/warehouses.json", JSON.stringify(jsonDataParsed));
 };
 
+const readInventories = () => {
+  const jsonData = fs.readFileSync('./data/inventories.json', 'utf8');
+  const jsonDataParsed = JSON.parse(jsonData);
+  return jsonDataParsed;
+};
+
+const writeInventories = (jsonDataParsed) => {
+  fs.writeFileSync('./data/inventories.json', JSON.stringify(jsonDataParsed));
+};
+
+
 // format phone number to +1 (234) 234-2345 format
 const formatPhoneNum = (phoneNum) => {
   // Keep only numbers in phoneNum (remove all other characters)
@@ -57,14 +68,25 @@ const updateOne = (id, body) => {
 };
 
 const deleteOne = (id) => {
-  //delete single warehouse and associated inventories
   const warehouses = getAll();
-  const warehouse = warehouses.find((warehouses) => warehouses.id === id);
-  const warehouseIndex = warehouses.indexOf(warehouse);
-  warehouses.splice(warehouseIndex, 1);
+  const inventories = readInventories();
+
+  const warehouseId = id;
+  let i = warehouses.findIndex((warehouse) => warehouse.id === warehouseId);
+  warehouses.splice(i, 1);
+  
+  //delete all inventories associated with warehouse
+  inventories.forEach((inventory) => {
+    if (inventory.warehouseId === warehouseId) {
+      let j = inventories.findIndex((inventory) => inventory.id === inventory.id);
+      inventories.splice(j, 1);
+    }
+  }
+  );
   writeWarehouses(warehouses);
+  writeInventories(inventories);
   return warehouses;
-};
+}
 
 const createOne = (warehouseDetails) => {
   const warehousesData = readWarehouses();
@@ -98,3 +120,4 @@ module.exports = {
   deleteOne,
   createOne,
 };
+
