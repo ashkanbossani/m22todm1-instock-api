@@ -53,13 +53,13 @@ const updateOne = (id, body) => {
   const warehouses = getAll();
   const warehouseId = id;
   let i = warehouses.findIndex((warehouse) => warehouse.id === warehouseId);
-
-  warehouses[i].name = body.name;
-  warehouses[i].address = body.addres;
+  console.log(warehouses[i]);
+  warehouses[i].name = body.warehouseName;
+  warehouses[i].address = body.address;
   warehouses[i].city = body.city;
   warehouses[i].country = body.country;
   warehouses[i].contact.name = body.name;
-  warehouses[i].contact.position = body.postition;
+  warehouses[i].contact.position = body.position;
   warehouses[i].contact.phone = body.phone;
   warehouses[i].contact.email = body.email;
 

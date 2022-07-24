@@ -46,14 +46,14 @@ const getIndividual = (req, res) => {
 const updateOne = (req, res) => {
   const warehouses = warehousesModel.updateOne(req.params.id, req.body);
   if (
-    !warehouseDetails.warehouseName ||
-    !warehouseDetails.address ||
-    !warehouseDetails.city ||
-    !warehouseDetails.country ||
-    !warehouseDetails.name ||
-    !warehouseDetails.position ||
-    !warehouseDetails.phone ||
-    !warehouseDetails.email
+    !warehouses.warehouseName ||
+    !warehouses.address ||
+    !warehouses.city ||
+    !warehouses.country ||
+    !warehouses.name ||
+    !warehouses.position ||
+    !warehouses.phone ||
+    !warehouses.email
   ) {
     return res
       .status(400)
