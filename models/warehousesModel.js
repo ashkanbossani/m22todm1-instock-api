@@ -75,7 +75,7 @@ const deleteOne = (id) => {
   let i = warehouses.findIndex((warehouse) => warehouse.id === warehouseId);
   warehouses.splice(i, 1);
   
-  //delete all inventories associated with warehouse using filter
+  //delete all inventories associated with warehouse using filter method
   const filteredInventories = inventories.filter((inventory) => {
     return inventory.warehouseId !== warehouseId;
   }
