@@ -75,16 +75,14 @@ const deleteOne = (id) => {
   let i = warehouses.findIndex((warehouse) => warehouse.id === warehouseId);
   warehouses.splice(i, 1);
   
-  //delete all inventories associated with warehouse
-  inventories.forEach((inventory) => {
-    if (inventory.warehouseId === warehouseId) {
-      let j = inventories.findIndex((inventory) => inventory.id === inventory.id);
-      inventories.splice(j, 1);
-    }
+  //delete all inventories associated with warehouse using filter
+  const filteredInventories = inventories.filter((inventory) => {
+    return inventory.warehouseId !== warehouseId;
   }
   );
   writeWarehouses(warehouses);
-  writeInventories(inventories);
+  writeInventories(filteredInventories);
+ 
   return warehouses;
 }
 
