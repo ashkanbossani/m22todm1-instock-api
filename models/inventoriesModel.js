@@ -21,7 +21,21 @@ const getIndividual = (id) => {
   return item;
 };
 
-// const updateOne = (id, body) => {};
+const updateOne = (id, body) => {
+  const inventoryData = getAll();
+  const inventoryId = id;
+  let i = inventoryData.findIndex((inventory) => inventory.id === inventoryId );
+
+  inventoryData[i].itemName = body.itemName;
+  inventoryData[i].description = body.description;
+  inventoryData[i].category = body.category;
+  inventoryData[i].status = body.status;
+  inventoryData[i].warehouseName = body.warehouseName;
+
+  writeInventory(inventoryData);
+  return inventoryData[i];
+
+}
 
 const deleteOne = (id) => {
   const inventory = getAll();
@@ -55,7 +69,7 @@ const createOne = (itemDetails) => {
 module.exports = {
   getAll,
   getIndividual,
-  // updateOne,
+   updateOne,
   deleteOne,
   createOne,
 };
