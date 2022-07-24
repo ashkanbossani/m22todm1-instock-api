@@ -21,28 +21,19 @@ const getIndividual = (req, res) => {
 
 //Inventory edit field validation - fields
 const updateOne = (req, res) => {
-  const inventory = inventoriesModel.updateOne(req.params.id, req.body);
+//  const itemDetails = req.body;
+const inventory = inventoriesModel.updateOne(req.params.id, req.body);
   if (
-    !itemDetails.itemName || 
-    !itemName.description ||
-    !itemName.category ||
-    !itemName.status ||
-    !itemName.warehouseName
+    !inventory.itemName || 
+    !inventory.description ||
+    !inventory.category ||
+    !inventory.status ||
+    !inventory.warehouseName
   ) {
     return res
     .status(400)
     .send("All fields (item name, description, category, status & warehouse) are required."
     );
-  }
-  if (!itemisValid(itemName)) {
-    return res 
-    .status(400)
-    .send("Item name must be more than 3 words.")
-  }
-  if(!descriptionisValid(description)){
-    return res
-    .status(400)
-    .send("Description must contain more than 10 words")
   }
   res.status(200).json(inventory);
 };
