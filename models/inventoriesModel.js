@@ -25,8 +25,6 @@ const updateOne = (id, body) => {
   const inventoryData = getAll();
   const inventoryId = id;
   let i = inventoryData.findIndex((inventory) => inventory.id === inventoryId );
-  console.log(inventoryData[i]);
-  console.log("body: ", body)
 
   inventoryData[i].itemName = body.itemName;
   inventoryData[i].description = body.description;

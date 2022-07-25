@@ -26,7 +26,6 @@ const writeInventories = (jsonDataParsed) => {
 const formatPhoneNum = (phoneNum) => {
   // Keep only numbers in phoneNum (remove all other characters)
   const numbers = phoneNum.match(/[\d]/g);
-  console.log("array of numbers", numbers);
   // Format number to +1 (234) 345-4325 format
   const cleanedNumber = `+1 (${numbers.slice(0, 3).join("")}) ${numbers
     .slice(3, 6)
@@ -49,11 +48,9 @@ const getIndividual = (id) => {
 };
 
 const updateOne = (id, body) => {
-  console.log("body", body);
   const warehouses = getAll();
   const warehouseId = id;
   let i = warehouses.findIndex((warehouse) => warehouse.id === warehouseId);
-  console.log(warehouses[i]);
   warehouses[i].name = body.warehouseName;
   warehouses[i].address = body.address;
   warehouses[i].city = body.city;
