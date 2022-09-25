@@ -7,10 +7,6 @@ const warehouseRoutes = require("./routes/warehouses");
 require("dotenv").config();
 const PORT = process.env.PORT || 8080;
 
-//serve the public folder when a client request for server
-const path = require('path');
-app.use(express.static(path.join(__dirname + 'public')));
-
 app.use(express.json());
 app.use(cors());
 
