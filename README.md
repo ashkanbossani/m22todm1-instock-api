@@ -1,5 +1,5 @@
 # Project Overview
-InStock -- a modern Inventory Management System with a fast React front-end and a robust Express back-end. 
+API server for InStock -- a modern Inventory Management System with a fast React front-end and a robust Express back-end. 
 
 # Design
 The application design is responsive for mobile, tablet and desktop layouts.
@@ -16,20 +16,20 @@ Node.js, Express, Axios
 Made with love by Ashkan, Kulani, Valerie & Victory
 
 # Install
-Clone this repository via HTTPS or SSH:
-$ git clone https://github.com/ashkanbossani/m22todm1-instock-api.git
+Clone this repository via HTTPS or SSH:<br>
+$ git clone https://github.com/ashkanbossani/m22todm1-instock-api.git <br>
 $ git clone git@github.com:ashkanbossani/m22todm1-instock-api.git
 
-Go into the repository:
+Go into the repository:<br>
 $ cd m22todm1-instock-api
 
-Install dependencies:
-$ npm install
-$ npm install express
-$ npm install cors
-$ npm install uuid
-$ npm install nodemon -D
+Install dependencies:<br>
+$ npm install <br>
+$ npm install express <br>
+$ npm install cors <br>
+$ npm install uuid <br>
+$ npm install nodemon -D <br>
 $ npm install dotenv --save
 
-Run the app:
+Run the app:<br>
 $ npm start
